@@ -90,7 +90,7 @@ Use sempre os tokens em vez de valores fixos:
 
 ### Ícones
 
-25 ícones exportados do Figma, disponíveis pelo componente `Icon`:
+Ícones exportados do Figma, disponíveis pelo componente `Icon` (a lista completa está em `iconNames`):
 
 ```tsx
 <Icon name="search" />
@@ -101,7 +101,61 @@ Para adicionar um ícone novo: exporte-o do Figma como SVG para `src/assets/icon
 
 ### Componentes
 
-Cada componente fica em `src/components/<Nome>/` e todos aparecem na tela inicial (`src/app/index.tsx`), que serve de catálogo. Abra o app para ver todas as variantes e estados.
+Cada componente fica em `src/components/<Nome>/` e pode ser importado de `@/components`:
+
+```tsx
+import { Button, StatusBadge, TextField } from '@/components';
+```
+
+A tela inicial (`src/app/index.tsx`) é um catálogo com todos os componentes, variantes e estados. Abra o app para vê-los.
+
+**Botões e ações**
+
+| Componente | Para quê | Props principais |
+|---|---|---|
+| `Button` | botão primário ou secundário | `title`, `variant` (`primary` \| `secondary`), `size` (`sm` \| `md` \| `lg` \| `xl`), `icon`, `disabled` |
+| `ArrowButton` | botão mobile com rótulo à esquerda e seta à direita | `title`, `variant`, `icon` |
+| `ActionTile` | blocos grandes da página inicial (reportar / ler QR code) | `variant` (`report` \| `qr-code`), `size` |
+| `ActionCard` | cartão "Acompanhar ocorrência" | `title`, `icon` |
+| `TextLink` | link de texto ("Esqueci a palavra-passe") | `title`, `onPress` |
+| `BackButton` | seta de voltar (mobile) | `onPress` |
+| `IconButton` | fechar modal, lanterna, alternar câmara | `icon`, `variant` (`outline` \| `subtle`), `selected` |
+| `IconToggle` | botão de ícone que liga/desliga (ex.: filtro) | `icon`, `active` |
+| `UploadButton` | anexar foto | `variant` (`full` \| `compact`), `label` |
+
+**Estado e dados**
+
+| Componente | Para quê | Props principais |
+|---|---|---|
+| `StatusBadge` | etiqueta de estado da ocorrência | `status` (`pending` \| `in-progress` \| `done` \| `error`) |
+| `StatCard` | cartão de estatística | `label`, `value`, `caption`, `variant` |
+| `SummaryCard` | resumo dos dados da ocorrência | `items`, `title` |
+| `ResultSymbol` | símbolo de sucesso/cancelamento | `variant` (`confirmation` \| `cancellation`) |
+| `StarRating` | avaliação de 1 a 5 estrelas | `value`, `onChange`, `size` |
+
+**Formulários**
+
+| Componente | Para quê | Props principais |
+|---|---|---|
+| `TextField` | campo de texto, palavra-passe ou área de texto | `value`, `onChangeText`, `label`, `variant` (`text` \| `password` \| `textarea`), `error`, `helperText` |
+| `FieldLabel` | rótulo de campo | `children` |
+| `Select` | lista suspensa (escola, categoria, piso, sala) | `options`, `value`, `onChange`, `label` |
+| `SelectOption` | item de lista selecionável | `label`, `selected`, `onPress` |
+| `LanguageSwitch` | seletor PT \| EN | `value`, `onChange` |
+
+**Navegação e estrutura**
+
+| Componente | Para quê | Props principais |
+|---|---|---|
+| `AppHeader` | cabeçalho mobile | `variant` (`logo` \| `logo-logout` \| `back-logo` \| `back-title`), `title`, `onBack`, `onLogout` |
+| `BottomTabBar` | barra de abas inferior (Pesquisa, Início, Reportar) | `active`, `onChange` |
+| `LanguageFooter` | rodapé com botão de idioma | `open`, `onOpenChange`, `language`, `onChangeLanguage` |
+| `TopNav` | menu do topo (web) | `active`, `onChange`, `items`, `language`, `onChangeLanguage` |
+| `ConfirmModal` | modal de confirmação (`ConfirmDialog` é só o cartão) | `visible`, `title`, `message`, `onConfirm`, `onCancel` |
+| `QrFrame` | moldura do leitor de QR code | `size`, `children` (pré-visualização da câmara) |
+| `Logo` | logótipo | `variant` (`full` \| `campus-fix` \| `campus-fix-shadow`), `width` ou `height` |
+
+Os componentes são controlados: o estado (valor selecionado, aba ativa, modal aberto) fica na tela que os usa, e eles só avisam mudanças pelos callbacks (`onChange`, `onPress`…).
 
 ## Convenções
 
